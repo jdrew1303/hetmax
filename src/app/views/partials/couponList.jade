@@ -1,0 +1,11 @@
+div#container.container
+    div.row.grid-container
+        div(ng-controller='couponListController')
+            p There are {{coupons.length}} coupons
+            div.span4.grid-item(ng-repeat='coupon in coupons')
+                a(href="#")
+                    img(alt="", height="200", src="http://res.cloudinary.com/apartable/image/upload/c_fill,h_200,w_300/v1359504937/rqiugmyuoopusuzulxo3.jpg", width="300")
+                div.grid-details
+                    span.short-address
+                        a(href="#") {{coupon.title}}
+                    span.price {{coupon.price | currency }}

@@ -1,0 +1,34 @@
+{
+    "name": "hetmax",
+    "version": "0.0.1",
+    "description" : "Advanced Data Recovery Platform",
+    "homepage" : "https://hetmax.com",
+    "author" : "limadelic <limadelic@gmail.com>",
+    "contributors" : [
+        "pp <pp.vega@gmail.com>",
+        "mike <mikemps@gmail.com>"
+    ],
+    "dependencies": {
+        "coffee-script": "latest",
+        "async": "latest",
+        "underscore": "latest",
+        "jade": "latest",
+        "express": "latest",
+        "connect-assets": "latest",
+        "wd": "latest"
+    },
+    "devDependencies": {
+        "mocha": "latest",
+        "nodemon": "latest",
+        "should": "latest"
+    },
+    "engines": {
+        "node": ">=0.6",
+        "npm": ">=1.1"
+    },
+    "scripts": {
+        "pretest": "coffee -cl -o lib src",
+        "test": "mocha",
+        "autotest": "nodemon node_modules/mocha/bin/mocha %*"
+    }
+}

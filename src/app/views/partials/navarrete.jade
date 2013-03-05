@@ -1,0 +1,12 @@
+div#container.container
+    div.row.grid-container
+        div(ng-controller='productGridController')
+            div.span4
+                p.alert.alert-info Seleccione el producto cuyos datos desea mostrar y pulse el botón Actualizar
+                select(ng-model="selectedProductId", ng-options="item.id as item.d for item in products")
+                span.label.label-important(ng-show="selectedProductId", ng-bind="selectedProductId", style="margin:0 0 0 10px; padding: 3 10px;")
+                div
+                 button.btn.btn-primary(ng-click="updateProductInfo()") Actualizar
+            div.span8.grid-item
+                div(style="border:solid #EEE 1px;width:100%;padding:5px;")
+                    div.gridStyle(ng-grid="gridOptions")

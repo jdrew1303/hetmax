@@ -1,0 +1,14 @@
+extends layout
+
+block body
+
+    div(ng-view)
+
+    script(src='js/lib/jquery-1.8.2.min.js')
+    script(src='http://documentcloud.github.com/underscore/underscore.js')
+    script(src='js/lib/angular/angular.js')
+    script(src='js/lib/angular/angular-resource.js')
+    script(src='js/lib/angular/ui-bootstrap-tpls-0.1.0.js')
+    script(src='js/lib/angular/ng-grid-1.9.0.js')
+    != js('spydrApp')
+    != js('spydrApp.product')

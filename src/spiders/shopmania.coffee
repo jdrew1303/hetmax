@@ -4,14 +4,15 @@ $ = require('./jquery_wd').browser()
 @search = (model, products) ->
   $.init ->
     $.get 'http://www.shopmania.es', ->
-      $.first 'autocomplete_prod', (e, el)->
-        $.clear el, ->
-          $.type el, model, ->
-#            $.submit el, ->
-#              $.select '.price_row.rowfeat', products
-            $.first '#top_search_row', (e, el) ->
-              $.submit el, ->
-                  $.elementsByCssSelector 'div.price_row.rowfeat', products
+      $.elementByName 'q', (e, q) ->
+        q.clear ->
+          $.type q, model, ->
+            $.submit q, ->
+              $.source products
+#            $.select 'div.price_row.rowfeat', products
+#            $.first '#top_search_row', (e, el) ->
+#              $.submit el, ->
+#            $.select 'div.price_row.rowfeat', products
 #                    $.map els, read_product, products
 
 read_product = (row, callback) -> async.series

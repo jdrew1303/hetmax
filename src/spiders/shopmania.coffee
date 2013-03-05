@@ -1,19 +1,18 @@
 async = require 'async'
-wd = require 'wd'
-browser = wd.remote 'phantom-webdriver-001.herokuapp.com', 8910
+$ = require('./jquery_wd').browser()
 
-@best_price = (model, products) ->
-  browser.init ->
-    browser.get "http://www.shopmania.es", ->
-      browser.elementById 'autocomplete_prod', (err, el)->
-        browser.clear el, (err)->
-          browser.type el, model, (err)->
-            browser.elementByCssSelector '#top_search_row > button', (err, el)->
-              browser.clickElement el, (err)->
-                browser.takeScreenshot (err, img)->
-                  require("fs").writeFile "out.png", img, 'base64', (err)->
-                    browser.elementsByCssSelector 'div.price_row.rowfeat', (err, els)->
-                      async.map els, read_product, products
+@search = (model, products) ->
+  $.init ->
+    $.get 'http://www.shopmania.es', ->
+      $.first 'autocomplete_prod', (e, el)->
+        $.clear el, ->
+          $.type el, model, ->
+#            $.submit el, ->
+#              $.select '.price_row.rowfeat', products
+            $.first '#top_search_row', (e, el) ->
+              $.submit el, ->
+                  $.elementsByCssSelector 'div.price_row.rowfeat', products
+#                    $.map els, read_product, products
 
 read_product = (row, callback) -> async.series
 

@@ -5,6 +5,15 @@
   name = req.params.name
   res.render 'partials/' + name
 
+@search = (req, res) ->
+  spider = '../../spiders/spider'
+
+  require(spider).search(
+    req.params.spider
+    req.params.product
+    (price) -> res.json price
+  )
+
 @getProductBPI = (req, res) ->
   op = req.params.op
   model = req.params.pid
@@ -13,7 +22,7 @@
   shopmania.best_price model, (err, fetchedInfo) ->
     minPriceInfo =
       ok: false
-      info:[]
+      info: []
     fetchedInfo = _.filter fetchedInfo, (item) ->
       item.itemPrice && item.shippingPrice
     if fetchedInfo.length > 0

@@ -9,5 +9,5 @@ class @Spider
 
 @search = (spider, product, best) ->
   { search } = require "./#{spider}"
-  search product, (results) ->
+  search product, (e, results) ->
     best _.min results, (x) -> x.price

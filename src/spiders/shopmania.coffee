@@ -1,32 +1,33 @@
 async = require 'async'
-$ = require('./jquery_wd').browser()
+Spider = require("./spider").Spider
 
-@search = (model, products) ->
-  $.init ->
-    $.get 'http://www.shopmania.es', ->
-      $.elementByName 'q', (e, q) ->
-        q.clear ->
-          $.type q, model, ->
-            $.submit q, ->
-              $.source products
-#            $.select 'div.price_row.rowfeat', products
-#            $.first '#top_search_row', (e, el) ->
-#              $.submit el, ->
-#            $.select 'div.price_row.rowfeat', products
-#                    $.map els, read_product, products
+class Shopmania extends Spider
 
-read_product = (row, callback) -> async.series
+  search_product: (model, products) ->
+    @$.init =>
+      @$.get 'http://www.shopmania.es', =>
+        @$.elementById 'autocomplete_prod', (e, el) =>
+          el.clear =>
+            el.type model, =>
+              @$.elementByCssSelector '#top_search_row > button', (e, el)=>
+                el.click =>
+                  @$.elementsByCssSelector 'div.price_row.rowfeat', (e, els)=>
+                    async.map els, @_get_product_from_list, products
 
-  shippingPrice: (callback) ->
-      row.elementByCssSelector 'p.small.light',
-      (err, el) -> if not err and el then el.text callback else callback null
+  _get_product_from_list: (row, callback) -> async.series
 
-  itemPrice: (callback) ->
-      row.elementByCssSelector 'span.txt_price',
-      (err, el) -> if not err and el then el.text callback else callback null
+    shippingPrice: (callback) ->
+        row.elementByCssSelector 'p.small.light',
+        (err, el) -> if not err and el then el.text callback else callback null
 
-  urlV: (callback) ->
-      row.elementByCssSelector 'div.col_img > p > a > img',
-      (err, el)-> if not err and el then el.getAttribute('alt', callback) else callback null
+    itemPrice: (callback) ->
+        row.elementByCssSelector 'span.txt_price',
+        (err, el) -> if not err and el then el.text callback else callback null
 
-, callback
+    urlV: (callback) ->
+        row.elementByCssSelector 'div.col_img > p > a > img',
+        (err, el)-> if not err and el then el.getAttribute('alt', callback) else callback null
+
+  , callback
+
+exports.Shopmania = Shopmania

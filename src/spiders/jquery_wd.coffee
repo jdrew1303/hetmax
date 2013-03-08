@@ -18,4 +18,16 @@ wd = require 'wd'
   $.map = (arr, iterator, callback) ->
     async.mapSeries arr, iterator, callback
 
+  $.content = (el, selector, text) ->
+    $.first el, selector, (e, el) ->
+      el.text text
+
+  $.price = (el, selector, matcher, price) ->
+    if not price?
+      price = matcher
+      matcher = /(.*?) /
+
+    $.content el, selector, (e, text) ->
+      price e, Number text.replace(',', '.').match(matcher)[1]
+
   $

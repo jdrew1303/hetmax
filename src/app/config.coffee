@@ -21,6 +21,5 @@ routes = require './routes'
 
 app.get '/', routes.index
 app.get '/partials/:name', routes.partials
-app.get '/api/:op/:pid', routes.getProductBPI
-app.get '/search/:spider/:product', routes.search
+app.get '/:spider/:product', routes.search
 app.get '*', routes.index

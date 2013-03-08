@@ -23,9 +23,7 @@ wd = require 'wd'
       el.text text
 
   $.price = (el, selector, matcher, price) ->
-    if not price?
-      price = matcher
-      matcher = /(.*?) /
+    [price, matcher] = [matcher, /(.*?) /] unless price?
 
     $.content el, selector, (e, text) ->
       price e, Number text.replace(',', '.').match(matcher)[1]

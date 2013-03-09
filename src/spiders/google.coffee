@@ -3,9 +3,18 @@ async = require 'async'
 _ = require 'underscore'
 $ = require('./jquery_wd').browser()
 
-@best_price = (product, best) ->
+@best_price = (product, result) ->
   search product, (e, results) ->
-    best _.min results, (x) -> x.price
+    best = _.min results, (x) -> x.price
+    resolve_url best, result
+
+resolve_url = (product, result) ->
+  console.log "gonna click #{product.url}"
+  product.url.click ->
+    console.log 'clicked'
+    $.url (url) ->
+      product.url = url
+      result product
 
 search = (product, results) ->
   google_search product, ->

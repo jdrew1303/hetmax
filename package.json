@@ -29,6 +29,6 @@
     "scripts": {
         "pretest": "coffee -cl -o lib src",
         "test": "mocha",
-        "autotest": "nodemon node_modules/mocha/bin/mocha %*"
+        "autotest": "nodemon node_modules/mocha/bin/mocha"
     }
 }

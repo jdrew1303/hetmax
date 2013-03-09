@@ -6,10 +6,9 @@
   res.render 'partials/' + name
 
 @search = (req, res) ->
-  spider = '../../spiders/spider'
+  spider = "../../spiders/#{req.params.spider}"
 
-  require(spider).search(
-    req.params.spider
+  require(spider).best_price(
     req.params.product
     (price) -> res.json price
   )

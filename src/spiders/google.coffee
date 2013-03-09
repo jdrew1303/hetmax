@@ -3,8 +3,12 @@ async = require 'async'
 _ = require 'underscore'
 $ = require('./jquery_wd').browser()
 
-@search = (model, results) ->
-  google_search model, ->
+@best_price = (product, best) ->
+  search product, (e, results) ->
+    best _.min results, (x) -> x.price
+
+search = (product, results) ->
+  google_search product, ->
     find_stores ->
       product_in_stores results
 

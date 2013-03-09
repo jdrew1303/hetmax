@@ -1,9 +1,9 @@
-{ search } = require '../src/spiders/google'
+{ best_price } = require '../src/spiders/google'
 
 describe 'Google Spider', ->
 
   it 'should fetch me stuff', (done) ->
 
-    search '3TL941C', (e, results) ->
-      results.should.not.be.empty
+    best_price '3TL941C', (result) ->
+      result.price.should.not.be.lessThan 400
       done()

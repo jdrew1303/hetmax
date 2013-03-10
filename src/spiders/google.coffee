@@ -78,6 +78,10 @@ read_product_in_store = (row, product) -> async.series
   url: (value) ->
     $.first row, 'a[href]', (e, a) ->
       a.getAttribute 'href', (e, href) ->
-        value e, href.match /url\?q=(.*?)%3Futm/
+        value e, href.match(/url\?q=(.*)/)?[1]
 
-, product
+, (e, result) ->
+
+  result.spider = 'google'
+
+  product e, result

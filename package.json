@@ -15,6 +15,7 @@
         "jade": "latest",
         "express": "latest",
         "connect-assets": "latest",
+        "mongoose": "latest",
         "wd": "latest"
     },
     "devDependencies": {
@@ -29,6 +30,9 @@
     "scripts": {
         "pretest": "coffee -cl -o lib src",
         "test": "mocha",
-        "autotest": "nodemon node_modules/mocha/bin/mocha"
+        "autotest": "nodemon -w src -w test node_modules/mocha/bin/mocha",
+        "autorun": "nodemon -w src node_modules/coffee-script/bin/coffee app.coffee",
+        "phantom": "phantomjs --webdriver=default",
+        "db": "mongod --dbpath data"
     }
 }

@@ -1,13 +1,8 @@
 async = require 'async'
 
-_ = require 'underscore'
 $ = require('./jquery_wd').browser()
 
-@best_price = (product, best) ->
-  search product, (e, results) ->
-    best _.min results, (x) -> x.price
-
-search = (model, results) ->
+@search = (model, results) ->
   $.init ->
     $.get 'http://www.shopmania.es', ->
       $.elementById 'autocomplete_prod', (e, el) ->

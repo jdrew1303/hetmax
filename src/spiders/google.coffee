@@ -3,11 +3,7 @@ async = require 'async'
 _ = require 'underscore'
 $ = require('./jquery_wd').browser()
 
-@best_price = (product, best) ->
-  search product, (e, results) ->
-    best _.min results, (x) -> x.price
-
-search = (product, results) ->
+@search = (product, results) ->
   google_search product, ->
     find_stores ->
       product_in_stores results
@@ -80,8 +76,4 @@ read_product_in_store = (row, product) -> async.series
       a.getAttribute 'href', (e, href) ->
         value e, href.match(/url\?q=(.*)/)?[1]
 
-, (e, result) ->
-
-  result.spider = 'google'
-
-  product e, result
+, product

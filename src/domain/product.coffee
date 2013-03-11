@@ -12,12 +12,17 @@ Product = mongoose.model 'Product', new mongoose.Schema
 
 @best_price = (spider, model, best) ->
 
-  product = (values) ->
+  product = (values, result) ->
     values.spider = spider
     values.model = model
-    new Product values
+    product = new Product values
+    product.save (e) ->
+      product.saved = not e?
+      result product
 
   { search } = require "../spiders/#{spider}"
 
-  search model, (e, results) ->
-    best product _.min results, (x) -> x.price
+  search model, (e, results) -> product(
+    _.min results, (x) -> x.price
+    best
+  )

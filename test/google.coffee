@@ -4,6 +4,7 @@ describe 'Google Spider', ->
 
   it 'should fetch me stuff', (done) ->
 
-    best_price 'google', '3TL941C', (result) ->
-      result.price.should.be.lessThan 500
+    best_price 'google', '3TL941C', (product) ->
+      product.price.should.be.lessThan 500
+      product.saved.should.be.true
       done()

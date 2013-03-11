@@ -1,6 +1,6 @@
 async = require 'async'
 
-$ = require('./jquery_wd').browser()
+$ = require('../utils/jquery_wd').browser()
 
 @search = (model, results) ->
   $.init ->

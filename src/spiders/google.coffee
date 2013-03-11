@@ -1,7 +1,7 @@
 async = require 'async'
-
 _ = require 'underscore'
-$ = require('./jquery_wd').browser()
+
+$ = require('../utils/jquery_wd').browser()
 
 @search = (product, results) ->
   google_search product, ->

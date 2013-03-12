@@ -1,10 +1,10 @@
 async = require 'async'
-
 _ = require 'underscore'
-$ = require('./jquery_wd').browser()
 
-@search = (model, results) ->
-  google_search model, ->
+$ = require('../utils/jquery_wd').browser()
+
+@search = (product, results) ->
+  google_search product, ->
     find_stores ->
       product_in_stores results
 
@@ -34,17 +34,15 @@ read_products = (products) ->
 
 read_product = (row, product) -> async.series
 
-  link: (value) -> $.first row, 'h3.r a', value
+  link: (value) ->
+    $.first row, 'h3.r a', value
 
   price: (value) ->
-    $.first row, '.psliprice b', (e, b) ->
-      b.text (e, text) ->
-        value e, read_price text
+    $.price row, '.psliprice b', value
 
   from_store: (value) ->
-    $.first row, '.psliprice', (e, div) ->
-      div.text (e, text) ->
-        value e, text.match(/de.*tiendas/)?
+    $.content row, '.psliprice', (e, text) ->
+      value e, text.match(/de.*tiendas/)?
 
 , product
 
@@ -65,25 +63,17 @@ product_in_stores = (products) ->
 read_product_in_store = (row, product) -> async.series
 
   seller: (value) ->
-    $.first row, '.seller-name a', (e, a) ->
-      a.text value
+    $.content row, '.seller-name a', value
 
   price: (value) ->
-    $.first row, '.price-col span', (e, span) ->
-      span.text (e, text) ->
-        value e, read_price text
+    $.price row, '.price-col span', value
 
   total: (value) ->
-    $.first row, '.total-col span', (e, span) ->
-      span.text (e, text) ->
-        value e, read_price text
+    $.price row, '.total-col span', value
 
-  url: (value) -> $.first row, 'a[href]', value
+  url: (value) ->
+    $.first row, 'a[href]', (e, a) ->
+      a.getAttribute 'href', (e, href) ->
+        value e, href.match(/url\?q=(.*)/)?[1]
 
 , product
-
-read_price = (text) -> Number text.replace(',', '.').split(' ')[0]
-
-
-@search '3TL941C', (e, results)->
-  console.log results

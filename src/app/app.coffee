@@ -5,4 +5,4 @@ require './config'
 
 app.listen settings.port
 
-console.log "running on #{settings.port}"
+console.log "Running on #{settings.port}"

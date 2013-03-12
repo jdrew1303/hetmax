@@ -83,3 +83,7 @@ read_product_in_store = (row, product) -> async.series
 , product
 
 read_price = (text) -> Number text.replace(',', '.').split(' ')[0]
+
+
+@search '3TL941C', (e, results)->
+  console.log results

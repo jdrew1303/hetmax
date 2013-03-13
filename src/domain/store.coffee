@@ -6,8 +6,12 @@ async = require 'async'
   { best_price } = require './product'
 
   index_spider = (spider, done) ->
-    p spider
-    done()
+
+    index_product = (product, done) ->
+      done()
+#      best_price spider, product.model, done
+
+    async.each store.inventory, index_product, done
 
   async.each store.spiders, index_spider, done
 

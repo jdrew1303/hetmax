@@ -16,7 +16,6 @@ describe 'Spiders', ->
       verify_finds_best_price 'shopmania', '3TL941C', 10000, done
 
   verify_finds_best_price = (spider, model, max_price, done) ->
-    best_price spider, model, (product) ->
+    best_price spider, model, (e, product) ->
       product.price.should.be.lessThan max_price
-      product.saved.should.be.true
-      done()
+      done e

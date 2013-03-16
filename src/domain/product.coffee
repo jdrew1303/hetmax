@@ -15,10 +15,8 @@ Product = mongoose.model 'Product', new mongoose.Schema
   product = (values, result) ->
     values.spider = spider
     values.model = model
-    p product = new Product values
-    product.save (e) ->
-      product.saved = not e?
-      result product
+    product = new Product values
+    product.save (e) -> result e, product
 
   { search } = require "../spiders/#{spider}"
 

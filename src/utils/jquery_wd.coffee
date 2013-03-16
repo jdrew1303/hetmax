@@ -26,6 +26,7 @@ wd = require 'wd'
     [price, matcher] = [matcher, /(.*?) /] unless price?
 
     $.content el, selector, (e, text) ->
-      price e, Number text.replace(',', '.').match(matcher)[1]
+      text
+#      price e, Number text.replace(',', '.').match(matcher)[1]
 
   $

@@ -24,5 +24,3 @@ app.get '/partials/:name', routes.partials
 app.get '/:spider/:product', routes.search
 app.get '*', routes.index
 
-i=3
-

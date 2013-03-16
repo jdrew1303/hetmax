@@ -8,10 +8,9 @@ async = require 'async'
   index_spider = (spider, done) ->
 
     index_product = (product, done) ->
-      done()
-#      best_price spider, product.model, done
+      best_price spider, product.model, done
 
-    async.each store.inventory, index_product, done
+    async.eachSeries [store.inventory[0]], index_product, done
 
-  async.each store.spiders, index_spider, done
+  async.eachSeries store.spiders, index_spider, done
 

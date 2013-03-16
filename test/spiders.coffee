@@ -2,10 +2,13 @@
 
 describe 'Spiders', ->
 
+  navarrete = require('../src/stores/navarrete').store
+
   describe 'Google', ->
 
     it 'should fetch me stuff', (done) ->
-      verify_finds_best_price 'google', '3TL941C', 500, done
+      p model = navarrete.inventory[0].model
+      verify_finds_best_price 'google', model, 500, done
 
   describe 'Shopmania', ->
 

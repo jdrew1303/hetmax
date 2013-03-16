@@ -20,13 +20,15 @@ wd = require 'wd'
 
   $.content = (el, selector, text) ->
     $.first el, selector, (e, el) ->
-      el.text text
+      if el?
+      then el.text text
+      else text null
 
   $.price = (el, selector, matcher, price) ->
     [price, matcher] = [matcher, /(.*?) /] unless price?
 
     $.content el, selector, (e, text) ->
-      text
-#      price e, Number text.replace(',', '.').match(matcher)[1]
-
+      if text?
+      then price e, Number text.replace(',', '.').match(matcher)[1]
+      else price e, 0
   $

@@ -77,3 +77,5 @@ read_product_in_store = (row, product) -> async.series
         value e, href.match(/url\?q=(.*)/)?[1]
 
 , product
+
+

@@ -15,7 +15,7 @@ Product = mongoose.model 'Product', new mongoose.Schema
   product = (values, result) ->
     values.spider = spider
     values.model = model
-    product = new Product values
+    p product = new Product values
     product.save (e) ->
       product.saved = not e?
       result product

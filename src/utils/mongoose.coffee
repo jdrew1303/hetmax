@@ -4,6 +4,5 @@ Schema = mongoose.Schema
 ObjectId = Schema.ObjectId
 
 mongoose.connect "mongodb://#{settings.db}/hetmax"
-mongoose.connection.on 'open',
-  -> console.log 'connected to db'
+mongoose.connection.on 'open', ->
 

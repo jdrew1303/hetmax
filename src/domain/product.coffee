@@ -13,10 +13,13 @@ Product = mongoose.model 'Product', new mongoose.Schema
 @best_price = (spider, model, best) ->
 
   product = (values, result) ->
+
     values.spider = spider
     values.model = model
+
     product = new Product values
-    product.save (e) -> result e, product
+
+    product.save (e) -> result null, product
 
   { search } = require "../spiders/#{spider}"
 

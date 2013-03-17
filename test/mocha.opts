@@ -3,4 +3,4 @@
 --require should
 --require test/test_helper.coffee
 --reporter spec
--t 30000
+-t 130000
